@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>qSort</title>
+</head>
+<body>
+
+<script type="text/javascript" src="publicLib.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        let arr = createData(5);
+        console.log("排序前数组:");
+        console.log(arr.toString());
+        let resArr = qSort(arr, 0, arr.length-1);
+        console.log("排序后数组:");
+        console.log(resArr.toString());
+
+        /**
+         * 快速排序，返回key的位置
+         * @param arr
+         * @param posLeft
+         * @param posRight
+         * @returns {number}
+         */
+        function qSort(arr, posLeft, posRight) {
+            if(posLeft < posRight) {  //防止递归时数组溢出
+
+                let key = arr[posLeft], arrLeft = posLeft, arrRight = posRight;
+                while (posLeft < posRight) {
+                    while (posLeft < posRight && arr[posRight] >= key) {
+                        posRight--;   //右边数字此轮排序已过，再循环时右侧减一
+                    }
+                    if (posLeft < posRight) {
+                        arr[posLeft] = arr[posRight];
+                        posLeft++;
+                    }
+
+                    while (posLeft < posRight && arr[posLeft] <= key) {
+                        posLeft++;  //左边数字此轮排序已过，再循环时左侧加一
+                    }
+                    if (posLeft < posRight) {
+                        arr[posRight] = arr[posLeft];
+                        posRight--;
+                    }
+                }
+                arr[posLeft] = key;
+                //递归调用函数完成两边的排序
+                qSort(arr, arrLeft, posLeft-1);
+                qSort(arr, posLeft+1, arrRight);
+            }
+
+            return arr;
+        }
+    }
+</script>
+</body>
+</html>

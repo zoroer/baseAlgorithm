@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bubbleSort</title>
+</head>
+<body>
+<div></div>
+<script type="text/javascript" src="publicLib.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        let arr = createData(100);
+        console.log("排序前数组:");
+        console.log(arr.toString());
+        let resArr = bubbleSort(arr);
+        console.log("排序后数组:");
+        console.log(resArr.toString());
+
+        /**
+         * 冒泡排序，返回排好序的新数组
+         * @param arr
+         * @returns {*}
+         */
+        function bubbleSort(arr) {
+            console.time("sortTimer");
+
+            let len = arr.length, trans;
+            for(let i=len; i>1; i--) {
+                for (let j = 0; j < i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        trans = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = trans;
+                    }
+                }
+            }
+            console.timeEnd("sortTimer");
+            return arr;
+        }
+    };
+</script>
+</body>
+</html>

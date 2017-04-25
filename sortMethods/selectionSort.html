@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>selectionSort</title>
+</head>
+<body>
+
+<script type="text/javascript" src="publicLib.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        let arr = createData(100);
+        console.log("排序前数组:");
+        console.log(arr.toString());
+        let resArr = selectionSor(arr);
+        console.log("排序后数组:");
+        console.log(resArr.toString());
+
+        /**
+         * 选择排序，返回排好序的新数组
+         * @param arr
+         * @returns {*}
+         */
+        function selectionSor(arr) {
+            console.time("timer");
+
+            let trans, minPos, len = arr.length;
+            for(let i=0; i<len-1; i++){
+                minPos = i;
+                for(let j=i+1; j<len; j++){
+                    if( arr[j] < arr[minPos] ){
+                        minPos = j;
+                    }
+                }
+                trans = arr[i];
+                arr[i] = arr[minPos];
+                arr[minPos] = trans;
+            }
+
+            console.timeEnd("timer");
+            return arr;
+        }
+    }
+</script>
+</body>
+</html>

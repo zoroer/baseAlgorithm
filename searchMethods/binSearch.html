@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>binSearch</title>
+</head>
+<body>
+
+<script type="text/javascript" src="publicLib.js"></script>
+<script type="text/javascript">
+    let newArr = createData(500);
+    console.log("数组为: " + newArr.toString());
+    let dataPos = binSearch(newArr, 10);
+    console.log("数据的位置为: " + dataPos);
+
+    /**
+     * 二分法查找数据，返回数据的下标(如果存在，不存在返回-1)
+     * @param arr
+     * @param data
+     * @returns {*}
+     */
+    function binSearch(arr, data) {
+        let left=0, right=arr.length-1, midPos;
+
+        while(left <= right){
+            midPos = Math.floor( (left + right) / 2 );
+            if( arr[midPos] < data ){
+                left = midPos + 1;
+            }else if( arr[midPos] > data ){
+                right = midPos -1;
+            }else{
+                return midPos;
+            }
+        }
+
+        return -1;
+    }
+</script>
+
+</body>
+</html>

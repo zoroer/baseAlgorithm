@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>allSorts</title>
+</head>
+<body>
+
+<script type="text/javascript" src="publicLib.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        let preArr = createData(100);
+        console.log("排序前数组:");
+        console.log(preArr.toString());
+
+        let resArr = quickSort(preArr, 0, preArr.length-1);
+        console.log("排序后数组:");
+        console.log(resArr.toString());
+
+        /**
+         * 冒泡排序，返回排好序的数组
+         * @param arr
+         * @returns {*}
+         */
+        function bubbleSort(arr) {
+            let temp, len = arr.length;
+
+            for(let out=len; out>1; out--){
+                for(let inner=0; inner<len-1; inner++){
+                    if( arr[inner] > arr[inner+1] ){
+                        temp = arr[inner];
+                        arr[inner] = arr[inner+1];
+                        arr[inner+1] = temp;
+                    }
+                }
+            }
+
+            return arr;
+        }
+
+        /**
+         * 选择排序，返回排好序的数组
+         * @param arr
+         * @returns {*}
+         */
+        function selectionSort(arr){
+            var tempPos, temp, len=arr.length;
+
+            for(let out=0; out<len-1; out++){
+                tempPos = out;
+                for(let inner=out+1; inner<len; inner++){
+                    if( arr[inner] < arr[tempPos] ){
+                        tempPos = inner;
+                    }
+                }
+                temp = arr[tempPos];
+                arr[tempPos] = arr[out];
+                arr[out] = temp;
+            }
+
+            return arr;
+        }
+
+        /**
+         * 插入排序，返回排好序的数组
+         * @param arr
+         * @returns {*}
+         */
+        function insertSort(arr) {
+            let tempPos, temp, len=arr.length;
+
+            for(let out=1; out<len; out++){
+                temp = arr[out];
+                tempPos = out;
+
+                while( tempPos > 0 && temp < arr[tempPos-1] ){
+                    arr[tempPos] = arr[tempPos-1];
+                    tempPos--;
+                }
+                arr[tempPos] = temp;
+            }
+
+            return arr;
+        }
+
+        /**
+         * 快速排序，返回排好序的数组
+         * @param arr
+         * @param left
+         * @param right
+         * @returns {*}
+         */
+        function quickSort(arr, left, right) {
+            if(left < right){
+                let key = arr[left], posLeft = left, posRight = right;
+
+                while(left < right){
+                    while(left < right && arr[right] >= key){
+                        right--;
+                    }
+                    if(left < right){
+                        arr[left] = arr[right];
+                        left++;
+                    }
+
+                    while(left < right && arr[left] <= key){
+                        left++;
+                    }
+                    if(left < right){
+                        arr[right] = arr[left];
+                        right--;
+                    }
+                }
+                arr[left] = key;
+                quickSort(arr, posLeft, left-1);
+                quickSort(arr, left+1, posRight);
+            }
+            return arr;
+        }
+    };
+</script>
+</body>
+</html>
