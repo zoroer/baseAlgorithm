@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dataCount</title>
+</head>
+<body>
+
+<script type="text/javascript" src="publicLib.js"></script>
+<script type="text/javascript">
+    let newArr = createData(100);
+    console.log("数组为: " + newArr.toString());
+    let dataCount = countData(newArr, 10);
+    console.log("数据的出现的次数为: " + dataCount);
+
+    /**
+     * 二分法查找数据，返回数据的下标(如果存在，不存在返回-1)
+     * @param arr
+     * @param data
+     * @returns {*}
+     */
+    function binSearch(arr, data) {
+        let left=0, right=arr.length-1, midPos;
+
+        while(left <= right){
+            midPos = Math.floor( (left + right) / 2 );
+            if( arr[midPos] < data ){
+                left = midPos + 1;
+            }else if( arr[midPos] > data ){
+                right = midPos -1;
+            }else{
+                return midPos;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * 计算数据出现的次数
+     * @param arr
+     * @param data
+     * @returns {number}
+     */
+    function countData(arr, data) {
+        let count = 0;
+        let pos = binSearch(arr, data);
+        if( pos == -1 ) return -1;
+        count++;
+
+        for(let i=pos-1; i>0; i--) {
+            if( arr[i] == data ) {
+                count++;
+            } else{
+                break;
+            }
+        }
+
+        for(let j=pos+1; j<arr.length; j++) {
+            if( arr[j] == data ) {
+                count++;
+            }else{
+                break;
+            }
+        }
+
+        return count;
+    }
+</script>
+</body>
+</html>
