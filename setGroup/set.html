@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>set</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    /**
+     * 产生一个len长度的随机数数组
+     * @param length
+     * @returns {Array}
+     */
+    function randomNumber(length){
+        let arr = [];
+        for(let i=0; i<length; i++){
+            let newNumber = parseInt(Math.random() * 10);
+            arr.indexOf(newNumber) < 0 ? arr.push(newNumber) : i--;
+        }
+        return arr;
+    }
+
+    let arr1 = randomNumber(5);
+    let arr2 = randomNumber(5);
+    console.log("arr1: "+ arr1);
+    console.log("arr2: "+ arr2);
+
+    /**
+     * 返回两个数组的并集
+     * @param arr1
+     * @param arr2
+     * @returns {*}
+     */
+    function union(arr1, arr2){
+        let totalArr = arr1.slice(0), len = arr2.length;
+        for(let i=0; i<len; i++){
+            if( arr1.indexOf(arr2[i]) < 0){
+                totalArr.push(arr2[i]);
+            }
+        }
+        return totalArr;
+    }
+//    console.log("union: "+ union(arr1, arr2) );
+
+    /**
+     * 返回两个交集
+     * @param arr1
+     * @param arr2
+     * @returns {Array}
+     */
+    function inset(arr1, arr2) {
+        let subArr = [], len = arr1.length;
+        for(let i=0; i<len; i++){
+            arr2.indexOf(arr1[i]) >= 0 && subArr.push(arr1[i]);
+        }
+        return subArr;
+    }
+//    console.log("inset: "+ inset(arr1, arr2) );
+
+    /**
+     * 返回两个子集
+     * @param arr1
+     * @param arr2
+     * @returns {Array}
+     */
+    function subset(arr1, arr2) {
+        let len1 = arr1.length, len2 = arr2.length, resBoolean;
+        if(len1 >= len2){
+            resBoolean = arr2.every(function (item) {
+                return arr1.indexOf(item) >= 0;
+            });
+            if(resBoolean) return arr2;
+        }else{
+            resBoolean = arr1.every(function (item) {
+                return arr2.indexOf(item) >= 0;
+            });
+            if(resBoolean) return arr1;
+        }
+    }
+//    console.log("subset: "+ subset( [1,3,4,5], [2,4,1,3,6,4,6,5,8]) );
+</script>
+</body>
+</html>

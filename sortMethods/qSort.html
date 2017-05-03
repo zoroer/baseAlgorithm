@@ -44,7 +44,7 @@
                         posRight--;
                     }
                 }
-                arr[posLeft] = key;
+                arr[posLeft] = key;  //最后posLeft=posRight
                 //递归调用函数完成两边的排序
                 qSort(arr, arrLeft, posLeft-1);
                 qSort(arr, posLeft+1, arrRight);
