@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>binaryTree</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /**
+     * 树的节点对象
+     * @param data
+     * @param left
+     * @param right
+     * @constructor
+     */
+    function TreeNode(data, left, right){
+        this.data = data;
+        this.left = left;
+        this.right = right;
+        this.show = function () {
+            return this.data;
+        }
+    }
+
+    /**
+     * 二叉排序树
+     * @constructor
+     */
+    function BST() {
+        this.rootNode = null;
+        this.insert = insert;
+//        this.inOrder = inOrder;
+    }
+
+    /**
+     * 插入数据到二叉排序树中
+     * @param data
+     */
+    function insert(data) {
+        let newNode = new TreeNode(data, null, null), currentNode, parentNode;
+        if(this.rootNode == null){
+            this.rootNode = newNode;
+        }else{
+            currentNode = this.rootNode;
+            while(1){
+                parentNode = currentNode;
+                if(data < currentNode.data){
+                    currentNode = currentNode.left;
+                    if(currentNode == null){
+                        currentNode.left = newNode;
+                        break;
+                    }
+                }else{
+                    currentNode = currentNode.right;
+                    if(currentNode == null){
+                        currentNode.right = newNode;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
