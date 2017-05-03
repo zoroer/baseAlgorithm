@@ -48,13 +48,13 @@
                 if(data < currentNode.data){
                     currentNode = currentNode.left;
                     if(currentNode == null){
-                        currentNode.left = newNode;
+                        parentNode.left = newNode;
                         break;
                     }
                 }else{
                     currentNode = currentNode.right;
                     if(currentNode == null){
-                        currentNode.right = newNode;
+                        parentNode.right = newNode;
                         break;
                     }
                 }
