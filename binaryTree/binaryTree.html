@@ -30,12 +30,15 @@
     function BST() {
         this.rootNode = null;
         this.insert = insert;
+        this.count = 0;
         this.inOrder = inOrder;
         this.preOrder = preOrder;
         this.lastOrder = lastOrder;
         this.minTree = minTree;
         this.maxTree = maxTree;
         this.searchData = searchData;
+        this.deleteData = deleteData;
+        this.countNode = countNode;
     }
 
     /**
@@ -125,7 +128,7 @@
     }
 
     /**
-     * 在BST中查找值
+     * 在BST中查找结点
      */
     function searchData(data) {
         let currentNode = this.rootNode;
@@ -140,6 +143,27 @@
             }
         }
         console.log(data + " is not in BST");
+        return false;
+    }
+
+    /**
+     * 在BST中删除结点
+     * @param data
+     */
+    function deleteData(data){
+
+    }
+
+    /**
+     * 返回树的结点数
+     * @returns {number}
+     */
+    function countNode(currentNode){
+        if(currentNode == null){
+            return 0;
+        }else{
+            return countNode(currentNode.left) + countNode(currentNode.right) + 1;
+        }
     }
 
     let tree = new BST();
@@ -153,8 +177,8 @@
 //    tree.inOrder(tree.rootNode);
 //    tree.minTree();
 //    tree.maxTree();
-    tree.searchData(3);
-
+//    tree.searchData(3);
+    console.log( tree.countNode(tree.rootNode) );
 </script>
 </body>
 </html>
