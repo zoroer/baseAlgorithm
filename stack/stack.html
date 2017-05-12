@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>stack</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /**
+     * 栈构造函数
+     * @constructor
+     */
+    function Stack(){
+        this.data = [];
+        this.length = 0;
+        this.push = function (data) {
+            this.data[this.length++] = data;
+        };
+        this.pop = function () {
+            return this.data[--this.length];
+        };
+        this.clear = function () {
+            this.length = 0;
+        };
+        this.peek = function () {
+            return this.data[this.length-1];
+        };
+        this.show = function () {
+            let str = '';
+            for(let i=0; i<this.length; i++){
+                str += (this.data[i]+ " ");
+            }
+            return str;
+        }
+    }
+
+
+
+    // 例子：利用两个栈实现队列的入队和出队
+
+    let stack1 = new Stack();
+    let stack2 = new Stack();
+
+    /**
+     * 用一个栈去存储数据
+     * @param data
+     */
+    function queuePush(data){
+        stack1.push(data);
+    }
+
+    /**
+     * 将第一个栈的pop之后存到第二个栈里
+     * @returns {T}
+     */
+    function queuePop(){
+        if(stack2.length <= 0) {
+            while (stack1.length > 0) {
+                stack2.push(stack1.pop());
+            }
+        }
+        if(stack2.length){
+            return stack2.pop();
+        }else{
+            return "the queue is null";
+        }
+
+    }
+
+    queuePush(1);
+    queuePush(2);
+    console.log(queuePop());
+    queuePush(5);
+    queuePush(7);
+    console.log(queuePop());
+
+</script>
+</body>
+</html>
