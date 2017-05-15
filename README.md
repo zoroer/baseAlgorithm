@@ -11,7 +11,7 @@ This project contains some basic algorithms about sort methods and search method
 1. binary search
 
 ## part III some basic algorithm structures
-1. Stack 
-2. Queue
-3. List
-4. Tree
+1. Stack struct
+2. Queue struct
+3. List struct 
+4. Tree struct
