@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>doubleLinkList</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function Node(eleValue){
+        this.value = eleValue;
+        this.prev = null;
+        this.next = null;
+    }
+
+    /**
+     * 链表构造函数
+     */
+    function DoubleLinkList(){
+        this.head = new Node("head");
+        this.findNode = function (value) {
+            let curNode = this.head;
+            while(curNode){
+                if(curNode.value === value){
+                    return curNode;
+                }
+                curNode = curNode.next;
+            }
+            return null;
+        };
+        this.insertNode = function (targetNodeValue, insertValue) {
+            let findRes = this.findNode(targetNodeValue);
+            let newNode = new Node(insertValue);
+            if(findRes){
+                newNode.next = findRes.next;
+                newNode.prev = findRes;
+                findRes.next !== null && (findRes.next.prev = newNode);
+                findRes.next = newNode;
+            }else{
+                console.log("the insert target is null!");
+            }
+        };
+        this.deleteNode = function (value) {
+            let findRes = this.findNode(value);
+            if(findRes){
+                findRes.prev.next = findRes.next;
+                findRes.next.prev = findRes.prev;
+
+                findRes.next = null;
+                findRes.prev = null;
+            }else{
+                console.log("the head of the link can not be deleted!");
+            }
+        };
+        this.showLinkList = function () {
+            let str = '', curNode = this.head;
+            while(curNode){
+                curNode.next ? str += (curNode.value+ " -> ") : str += curNode.value;
+                curNode = curNode.next;
+            }
+            return str;
+        };
+    }
+
+    let linkList = new DoubleLinkList();
+    linkList.insertNode("head", 1);
+    linkList.insertNode(1, 2);
+    linkList.insertNode(2, 3);
+    linkList.insertNode(3, 4);
+    linkList.insertNode(2, 5);
+    console.log( linkList.showLinkList() );
+    linkList.deleteNode(5);
+    linkList.deleteNode(1);
+    console.log( linkList.showLinkList() );
+</script>
+</body>
+</html>

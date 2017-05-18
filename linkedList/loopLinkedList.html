@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>loopLinkedList</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function Node(eleValue){
+        this.value = eleValue;
+        this.next = null;
+    }
+
+    /**
+     * 链表构造函数
+     */
+    function LoopLinkedList(){
+        this.head = new Node("head");
+        this.head.next = this.head; // 循环链表初始化时需要注意head结点的next为自身！
+        this.findNode = function (value) {
+            let curNode = this.head;
+            while(curNode.next.value !== 'head'){
+                if(curNode.value === value){
+                    return curNode;
+                }
+                curNode = curNode.next;
+
+            }
+            if(curNode.value === value){
+                return curNode;
+            }else{
+                return null;
+            }
+
+        };
+        this.findPreNode = function (value) {
+            let curNode = this.head;
+            while(curNode.next.value !== 'head'){
+                if(curNode.next.value === value){
+                    return curNode;
+                }
+                curNode = curNode.next;
+            }
+
+            return null;
+        };
+        this.insertNode = function (targetNodeValue, insertValue) {
+            let findRes = this.findNode(targetNodeValue);
+            if(findRes){
+                let newNode = new Node(insertValue);
+                newNode.next = findRes.next;
+                findRes.next = newNode;
+            }else{
+                console.log("the insert target is null!");
+            }
+        };
+        this.deleteNode = function (value) {
+            let findPreRes = this.findPreNode(value);
+            if(findPreRes){
+                findPreRes.next = findPreRes.next.next;
+            }else{
+                console.log("the head of the link can not be deleted!");
+            }
+        };
+        this.showLinkList = function () {
+            let str = '', curNode = this.head;
+            while(curNode.next.value !== "head"){
+                str += (curNode.value+ " -> ");
+                curNode = curNode.next;
+            }
+            return str += curNode.value;
+        };
+    }
+
+    let linkList = new LoopLinkedList();
+    linkList.insertNode("head", 1);
+    linkList.insertNode(1, 2);
+    linkList.insertNode(2, 3);
+    linkList.insertNode(3, 4);
+    linkList.insertNode(2, 6);
+    console.log( linkList.showLinkList() );
+    linkList.deleteNode(6);
+    console.log( linkList.showLinkList() );
+</script>
+</body>
+</html>
